@@ -17,6 +17,32 @@ module "security_group" {
     tags = merge(var.subnet_tags, var.tags)
 }
 
+module "s3_bucket_logs" {
+    source = "terraform-aws-modules/s3-bucket/aws"
+    version = "1.12.0"
+    create_bucket = var.enable_alb_logging
+    bucket = "${var.name}-alb-logs"
+    acl    = "log-delivery-write"
+    block_public_acls = true
+    block_public_policy = true
+    ignore_public_acls = true
+    restrict_public_buckets = true
+    versioning = {
+        enabled = true
+    }
+    force_destroy = true
+    attach_elb_log_delivery_policy = true
+    server_side_encryption_configuration = {
+        rule = {
+            apply_server_side_encryption_by_default = {
+                sse_algorithm = "aws:kms"
+            }
+        }
+    }
+
+    tags = merge(var.tags, var.s3_tags)
+}
+
 
 module "alb" {
     source = "terraform-aws-modules/alb/aws"
@@ -30,7 +56,7 @@ module "alb" {
     security_groups = [
         module.security_group.this_security_group_id
     ]
-    access_logs = var.access_logs
+    access_logs = var.enable_alb_logging ? {bucket = module.s3_bucket_logs.this_s3_bucket_id} : {}
     target_groups = var.target_groups
     https_listeners = var.https_listeners
     http_tcp_listeners = var.http_tcp_listeners

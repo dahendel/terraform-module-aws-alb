@@ -28,17 +28,24 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
 variable "subnet_tags" {
   description = "A mapping of tags to assign to security group"
   type        = map(string)
   default     = {}
 }
+
 variable "alb_tags" {
   description = "A mapping of tags to assign to alb"
   type        = map(string)
   default     = {}
 }
 
+variable "s3_tags" {
+  type = map(string)
+  default = {}
+  description = "Tags to apply specifically to s3 logging bucket"
+}
 ##########
 # Ingress
 ##########
@@ -99,10 +106,10 @@ variable "subnets" {
   description = "List of subnets for the alb"
 }
 
-variable "access_logs" {
-  type = map(string)
-  description = "Map to define s3 bucket for access logs"
-  default = {}
+
+variable "enable_alb_logging" {
+  default = true
+  description = "Enable ALB Access logs to s3"
 }
 
 variable "target_groups" {
