@@ -13,7 +13,7 @@ variable "vpc_id" {
 }
 
 variable "name" {
-  description = "Name of security group"
+  description = "Name of resources acts as a prefix"
   type        = string
 }
 
@@ -145,4 +145,5 @@ variable "internal" {
 variable "instance_ids" {
   description = "Instance IDs to assign target groups too"
   type = set(string)
+  default = []
 }
