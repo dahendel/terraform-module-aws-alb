@@ -142,8 +142,8 @@ variable "internal" {
   type = bool
 }
 
-variable "instance_ids" {
-  description = "Instance IDs to assign target groups too"
-  type = set(string)
-  default = []
+variable "instance_id" {
+  description = "Instance ID to assign target groups too"
+  type = string
+  default = ""
 }

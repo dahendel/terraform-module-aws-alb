@@ -105,10 +105,7 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
 resource "aws_alb_target_group_attachment" "this" {
     for_each = var.target_groups
     target_group_arn = aws_lb_target_group.this[each.key].arn
-    dynamic "target_id" {
-        for_each = lookup(each.value, "instance_ids", var.instance_ids)
-        content {
-            target_id = each.key
-        }
-    }
+    target_id = lookup(each.value, "instance_id", var.instance_id)
+
+
 }
