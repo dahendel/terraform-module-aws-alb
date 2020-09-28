@@ -57,7 +57,6 @@ module "alb" {
         module.security_group.this_security_group_id
     ]
     access_logs = var.enable_alb_logging ? {bucket = module.s3_bucket_logs.this_s3_bucket_id} : {}
-    target_groups = var.target_groups
     https_listeners = var.https_listeners
     http_tcp_listeners = var.http_tcp_listeners
     tags = merge(var.alb_tags, var.tags)
