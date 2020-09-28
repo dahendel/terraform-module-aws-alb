@@ -112,9 +112,15 @@ variable "enable_alb_logging" {
   description = "Enable ALB Access logs to s3"
 }
 
-variable "target_groups" {
+variable "https_listener_tgs" {
   description = "A list of maps containing key/value pairs that define the target groups to be created. Order of these maps is important and the index of these are to be referenced in listener definitions. Required key/values: name, backend_protocol, backend_port"
-  type        = map(string)
+  type        =  any
+  default     = []
+}
+
+variable "target_groups" {
+  description = "A map of maps to define additional target_groups"
+  type        =  map
   default     = {}
 }
 
