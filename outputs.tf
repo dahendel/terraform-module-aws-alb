@@ -1,7 +1,11 @@
-output "alb_arn" {
-  value = module.alb.this_lb_arn
+output "alb_outputs" {
+  value = module.alb
 }
 
-output "sg_id" {
-  value = module.security_group.this_security_group_id
+output "sg_outputs" {
+  value = module.security_group
+}
+
+output "s3_outputs" {
+  value = module.s3_bucket_logs
 }
