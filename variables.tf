@@ -29,7 +29,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "subnet_tags" {
+variable "security_group_tags" {
   description = "A mapping of tags to assign to security group"
   type        = map(string)
   default     = {}

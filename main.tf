@@ -14,7 +14,7 @@ module "security_group" {
     ingress_cidr_blocks = var.ingress_cidr_blocks
     egress_with_cidr_blocks = var.egress_with_cidr_blocks
     egress_with_self = var.egress_with_self
-    tags = merge(var.subnet_tags, var.tags)
+    tags = merge(var.security_group_tags, var.tags)
 }
 
 module "s3_bucket_logs" {
