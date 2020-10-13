@@ -153,3 +153,8 @@ variable "instance_id" {
   type = string
   default = ""
 }
+
+variable "load_balancer_type" {
+  default = "application"
+  description = "Load Balancer Type"
+}
