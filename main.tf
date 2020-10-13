@@ -49,7 +49,7 @@ module "alb" {
     version = "~> 5.0"
     name = "${var.name}-alb"
 
-    load_balancer_type = "application"
+    load_balancer_type = var.load_balancer_type
 
     vpc_id = var.vpc_id
     subnets = var.subnets
